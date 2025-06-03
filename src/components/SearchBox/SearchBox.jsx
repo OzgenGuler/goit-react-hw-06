@@ -1,6 +1,15 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { changeFilter, selectNameFilter } from "../redux/filtersSlice";
 
-const SearchBox = ({ value, onChange }) => {
+const SearchBox = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(selectNameFilter);
+
+  const handleChange = (e) => {
+    dispatch(changeFilter(e.target.value));
+  };
+
   return (
     <div
       style={{
@@ -12,12 +21,12 @@ const SearchBox = ({ value, onChange }) => {
         gap: "20px",
       }}
     >
-      <label>Find Contacts by Name </label>
+      <label htmlFor="search">Find Contacts by Name</label>
       <input
         type="text"
         id="search"
-        value={value}
-        onChange={onChange}
+        value={filter}
+        onChange={handleChange}
         placeholder="Search by name"
       />
     </div>

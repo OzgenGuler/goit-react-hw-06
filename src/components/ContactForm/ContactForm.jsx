@@ -1,9 +1,13 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import { nanoid } from "nanoid";
+import { useDispatch, useSelector } from "react-redux";
+import { addContact, selectContacts } from "../redux/contactsSlice";
+import { nanoid } from "nanoid";
 
-const ContactForm = ({ onAddContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -16,10 +20,24 @@ const ContactForm = ({ onAddContact }) => {
         .required("Enter your number !"),
     }),
     onSubmit: (values, { resetForm }) => {
-      onAddContact(values);
+      const duplicate = contacts.some(
+        (contact) => contact.name.toLowerCase() === values.name.toLowerCase()
+      );
+
+      if (duplicate) {
+        alert(`${values.name} is already in contacts.`);
+        return;
+      }
+      const newContacts = {
+        id: nanoid(),
+        name: values.name,
+        number: values.number,
+      };
+      dispatch(addContact(newContacts));
       resetForm();
     },
   });
+
   const handleNumberChange = (e) => {
     let value = e.target.value.replace(/\D/g, "");
     if (value.length > 3 && value.length <= 5) {
