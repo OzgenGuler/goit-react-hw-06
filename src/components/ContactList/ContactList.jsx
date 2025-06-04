@@ -22,7 +22,7 @@ const ContactList = ({ onDelete }) => {
         <Contact
           key={contact.id}
           contact={contact}
-          onClick={() => onDelete(contact.id)}
+          onDelete={() => onDelete(contact.id)}
           style={{
             marginBottom: "10px",
             border: "1px solid #ccc",

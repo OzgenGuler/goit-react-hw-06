@@ -2,7 +2,7 @@ import React from "react";
 // import { useDispatch } from "react-redux";
 // import { deleteContact } from "../redux/contactsSlice";
 
-const Contact = ({ contact, onDelete }) => {
+const Contact = ({ contact: { name, number }, onDelete }) => {
   // const dispatch = useDispatch();
   // const Contact = ({ id, name, number, handleContactDelete }) => {
   return (
@@ -18,11 +18,11 @@ const Contact = ({ contact, onDelete }) => {
     >
       <div>
         <p>
-          <strong>👤 {contact.name}</strong>
+          <strong>👤 {name}</strong>
         </p>
-        <p>📞 {contact.number}</p>
+        <p>📞 {number}</p>
       </div>
-      <button type="button" onClick={() => onDelete}>
+      <button type="button" onClick={onDelete}>
         Delete
       </button>
       {/* <div>

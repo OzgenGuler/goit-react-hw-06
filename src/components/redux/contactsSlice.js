@@ -28,7 +28,7 @@ const contactsSlice = createSlice({
             id: nanoid(),
             // name: name || "",
             // number: number || "",
-            ...contact,
+            ...contact.id,
           },
         };
       },
