@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { addContact, selectContacts } from "../redux/contactsSlice";
-import { nanoid } from "nanoid";
+// import { nanoid } from "nanoid";
 
 const ContactForm = () => {
   const dispatch = useDispatch();
@@ -20,21 +20,24 @@ const ContactForm = () => {
         .required("Enter your number !"),
     }),
     onSubmit: (values, { resetForm }) => {
-      const duplicate = contacts.some(
-        (contact) => contact.name.toLowerCase() === values.name.toLowerCase()
-      );
+      const exists = contacts.find((contact) => contact.name === values.name);
 
-      if (duplicate) {
+      if (exists) {
         alert(`${values.name} is already in contacts.`);
         return;
       }
-      const newContacts = {
-        id: nanoid(),
-        name: values.name,
-        number: values.number,
-      };
-      dispatch(addContact(newContacts));
+      // const newContacts = {
+      //   id: nanoid(),
+      //   name: values.name,
+      //   number: values.number,
+      // };
+      dispatch(addContact(values));
       resetForm();
+
+      if (!values.name || !values.number) {
+        alert("Name and number are required.");
+        return;
+      }
     },
   });
 
@@ -80,7 +83,7 @@ const ContactForm = () => {
           onChange={handleNumberChange}
           value={formik.values.number}
         />
-        {formik.touched.name && formik.errors.name && (
+        {formik.touched.number && formik.errors.number && (
           <div style={{ color: "red" }}>{formik.errors.number}</div>
         )}
       </div>

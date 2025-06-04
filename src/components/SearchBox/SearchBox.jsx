@@ -6,9 +6,9 @@ const SearchBox = () => {
   const dispatch = useDispatch();
   const filter = useSelector(selectNameFilter);
 
-  const handleChange = (e) => {
-    dispatch(changeFilter(e.target.value));
-  };
+  // const handleChange = (e) => {
+  //   dispatch(changeFilter(e.target.value));
+  // };
 
   return (
     <div
@@ -26,7 +26,7 @@ const SearchBox = () => {
         type="text"
         id="search"
         value={filter}
-        onChange={handleChange}
+        onChange={(e) => dispatch(changeFilter(e.target.value))}
         placeholder="Search by name"
       />
     </div>
