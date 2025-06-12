@@ -33,8 +33,8 @@ function App() {
     dispatch(addContact({ name, number }));
   };
 
-  const handleDeleteContact = (id) => {
-    dispatch(deleteContact(id));
+  const handleDeleteContact = (contact) => {
+    dispatch(deleteContact(contact));
   };
 
   const handleFilterChange = (e) => {
@@ -46,7 +46,7 @@ function App() {
       typeof contact.name === "string" &&
       contact.name.toLowerCase().includes(filter.toLowerCase())
   );
-  console.log(contacts);
+  // console.log(contacts);
 
   return (
     <div className={CSS.App}>

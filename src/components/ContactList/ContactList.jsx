@@ -37,7 +37,7 @@ const ContactList = ({ onDelete }) => {
           </span>
           <button
             type="button"
-            onDelete={() => onDelete(contact.id)}
+            onClick={() => onDelete(contact.id)}
             style={{
               backgroundColor: "#ff4d4d",
               color: "#fff",

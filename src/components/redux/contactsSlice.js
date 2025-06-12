@@ -28,14 +28,16 @@ const contactsSlice = createSlice({
             id: nanoid(),
             // name: name || "",
             // number: number || "",
-            ...contact.id,
+            ...contact,
           },
         };
       },
+    },
 
-      deleteContact(state, action) {
-        state.items = state.items.filter((c) => c.id !== action.payload);
-      },
+    deleteContact(state, action) {
+      state.items = state.items.filter(
+        (contact) => contact.id !== action.payload
+      );
     },
   },
 });
